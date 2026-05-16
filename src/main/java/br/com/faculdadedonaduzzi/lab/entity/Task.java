@@ -2,6 +2,8 @@ package br.com.faculdadedonaduzzi.lab.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -32,4 +34,35 @@ public class Task {
     }
 
     public Task(){}
+
+    public @NotBlank String getTitulo() {
+        return null;
+    }
+
+    public @NotBlank String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(Object descricao) {
+        this.descricao = (String) descricao;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(Object status) {
+        this.status = (TaskStatus) status;
+    }
+
+    public void setTitulo(@NotBlank String titulo) {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

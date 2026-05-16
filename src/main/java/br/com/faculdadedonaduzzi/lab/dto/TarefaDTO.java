@@ -11,6 +11,6 @@ public record TarefaDTO(
         TaskStatus status
 ) {
     public TarefaDTO(Task task){
-        this(task.getTitulo(), task.getDescricao(), task.getStatus());
+        this(task.getTitulo(), task.getDescricao(), (TaskStatus) task.getStatus());
     }
 }
