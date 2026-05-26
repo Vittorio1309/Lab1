@@ -1,0 +1,30 @@
+name: CI Kanban API
+
+on:
+  push:
+    branches:
+      - master #VERIFICAR O NOME DA SUA BRANCH PRINCIPAL (main, master, etc)
+  pull_request:
+    branches:
+      - master #VERIFICAR O NOME DA SUA BRANCH PRINCIPAL (main, master, etc)
+
+jobs:
+  build_e_testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Faz o git clone do nosso projeto para dentro do Runner
+      - name: Baixar o código fonte
+        uses: actions/checkout@v4
+
+      # 2. Instala o Java 21 no Runner
+      - name: Configurar o Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven # Otimização: Guarda os downloads para ser mais rápido na próxima vez
+
+      # 3. Executa o builqd da aplicação
+      - name: Compilar e Testar com Maven
+        run: mvn clean package

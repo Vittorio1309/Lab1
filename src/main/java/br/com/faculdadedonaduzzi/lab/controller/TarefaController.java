@@ -18,7 +18,7 @@ public class TarefaController {
 
     @GetMapping("/version")
     public String getVersion() {
-        return "v1.1.0";
+        return "v1.0.0";
     }
 
     @GetMapping
@@ -44,15 +44,6 @@ public class TarefaController {
         newTask.setStatus(task.status());
         Task savedTask = taskRepository.save(newTask);
         return new TarefaReponseDTO(savedTask);
-
-
-    erro adicionado intencionalmente para dar problema no build
-
-
     }
 
-    @GetMapping("/HEALTH")
-    public String getStatus() {
-        return "ok";
-    }
 }

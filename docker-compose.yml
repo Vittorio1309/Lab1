@@ -1,4 +1,5 @@
 services:
+  # 1. O nosso Banco de Dados
   postgres-db:
     image: postgres:15-alpine
     container_name: kanban-postgres
@@ -7,20 +8,24 @@ services:
       POSTGRES_PASSWORD: admin_password
       POSTGRES_DB: kanban_db
     ports:
-      - "5433:5432"
+      - "5432:5432" # Expondo para usarmos ferramentas gráficas como o DBeaver
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data # O HD externo!
+
+  # 2. A nossa API Spring Boot
   kanban-api:
-    build: .
+    build: . # A mágica: O Compose vai olhar o Dockerfile, fazer o multi-stage build sozinho!
     container_name: kanban-backend
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc::postgresql://postgresql://postgres-db:5433/kanban_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/kanban_db # O uso do DNS Interno!
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin_password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      - postgres-db
+      - postgres-db # Ordem de inicialização: A API só liga depois do banco
+
+# Declarando o cofre blindado para o Docker criar
 volumes:
   postgres-data:

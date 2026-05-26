@@ -1,0 +1,21 @@
+name: Meu Primeiro Robô de CI
+
+# GATILHO (Quando esse robô deve acordar?)
+on:
+  push:
+    branches:
+      - main #EVRIFICAR O NOME DA SUA BRANCH PRINCIPAL (main, master, etc)
+
+# O QUE ELE VAI FAZER?
+jobs:
+  meu_primeiro_job:
+    # ONDE ELE VAI TRABALHAR? (O Runner)
+    runs-on: ubuntu-latest
+
+    # PASSO A PASSO
+    steps:
+      - name: Dizer Olá
+        run: echo "Olá, Faculdade! Meu primeiro CI rodou com sucesso."
+
+      - name: Mostrar informações da máquina
+        run: uname -a

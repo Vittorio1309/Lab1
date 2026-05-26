@@ -1,6 +1,0 @@
-/target
-.git
-.mvn
-.idea
-.vscode
-Dockerfile
